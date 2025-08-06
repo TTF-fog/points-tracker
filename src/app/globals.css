@@ -43,10 +43,9 @@ html, body {
   color: rgb(0, 0, 0);
 }
 
-
 .event-header {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
   background-color: #f7fafc;
   font-weight: 600;
   border-bottom: 1px solid #e2e8f0;
@@ -54,7 +53,7 @@ html, body {
 
 .event-row {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
 }
 
 .event-cell {

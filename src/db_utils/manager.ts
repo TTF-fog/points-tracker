@@ -6,6 +6,7 @@ interface EventData {
     name: string;
     position: number;
     points: number;
+    date: Date;
 }
 
 interface EventUpdateData {
@@ -65,13 +66,30 @@ export const updateHousePoints = async (id: string, points: number) => {
 
 export const addEvent = async (
     houseId: string,
-    eventData: EventData
+    eventData: EventData,
+ 
 ) => {
     try {
        
         return await House.findOneAndUpdate(
             { name: houseId },
-            { $push: { events: eventData } },
+            { $push: { events: { ...eventData } } },
+            { new: true }
+        );
+    } catch (error: any) {
+        throw new Error(`Failed to add event: ${error.message}`);
+    }
+};
+export const addEventByHouseName = async (
+    houseName: string,
+    eventData: EventData,
+ 
+) => {
+    try {
+       
+        return await House.findOneAndUpdate(
+            { name: houseName },
+            { $push: { events: { ...eventData } } },
             { new: true }
         );
     } catch (error: any) {

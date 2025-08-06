@@ -64,14 +64,7 @@ export default function ClientPage({ initialHouses, initialEvents }: ClientPageP
             </div>
             <div>
             <h1 style={{color: 'white', textAlign: 'center'}}> House Events</h1>
-            {events.map((event) => (
-                <EventList events={event as unknown as Array<{
-                    name: string;
-                    position: number;
-                    points: number;
-                    color: string;
-                }>} />
-            ))}
+            <EventList events={events} />
         </div>
         </div>
     );
