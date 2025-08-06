@@ -27,12 +27,85 @@ export const revalidate = 300; // Revalidate every 5 minutes (300 seconds)
 
 export default async function Home() {
     try {
+        let events: Event[] = [
+            {
+                name: "Track Meet",
+                position: 1,
+                points: 150,
+                date: new Date(Date.now() - Math.floor(Math.random() * 30 * 24 * 60 * 60 * 1000)),
+                color: "yellow"
+            },
+            {
+                name: "Math Olympiad", 
+                position: 2,
+                points: 100,
+                date: new Date(Date.now() - Math.floor(Math.random() * 30 * 24 * 60 * 60 * 1000)),
+                color: "red"
+            },
+            {
+                name: "Science Fair",
+                position: 3, 
+                points: 75,
+                date: new Date(Date.now() - Math.floor(Math.random() * 30 * 24 * 60 * 60 * 1000)),
+                color: "blue"
+            },
+            {
+                name: "Debate Tournament",
+                position: 1,
+                points: 125,
+                date: new Date(Date.now() - Math.floor(Math.random() * 30 * 24 * 60 * 60 * 1000)),
+                color: "green"
+            },
+            {
+                name: "Chess Championship",
+                position: 2,
+                points: 200,
+                date: new Date(Date.now() - Math.floor(Math.random() * 30 * 24 * 60 * 60 * 1000)),
+                color: "yellow"
+            },
+            {
+                name: "Art Exhibition",
+                position: 3,
+                points: 100,
+                date: new Date(Date.now() - Math.floor(Math.random() * 30 * 24 * 60 * 60 * 1000)),
+                color: "red"
+            },
+            {
+                name: "Swimming Gala",
+                position: 1,
+                points: 175,
+                date: new Date(Date.now() - Math.floor(Math.random() * 30 * 24 * 60 * 60 * 1000)),
+                color: "blue"
+            },
+            {
+                name: "Robotics Contest",
+                position: 2,
+                points: 150,
+                date: new Date(Date.now() - Math.floor(Math.random() * 30 * 24 * 60 * 60 * 1000)),
+                color: "green"
+            },
+            {
+                name: "Music Festival",
+                position: 3,
+                points: 125,
+                date: new Date(Date.now() - Math.floor(Math.random() * 30 * 24 * 60 * 60 * 1000)),
+                color: "yellow"
+            },
+            {
+                name: "Public Speaking",
+                position: 1,
+                points: 100,
+                date: new Date(Date.now() - Math.floor(Math.random() * 30 * 24 * 60 * 60 * 1000)),
+                color: "red"
+            }
+        ];
         await dbConnect();
         for (let i = 0; i < 10; i++) {
-            addEventByHouseName("Lions",{name: "Test Event", position: 1, points: 100, date: new Date(Date.now() - Math.floor(Math.random() * 30 * 24 * 60 * 60 * 1000))});
-            addEventByHouseName("Tigers",{name: "Test Event", position: 1, points: 100, date: new Date(Date.now() - Math.floor(Math.random() * 30 * 24 * 60 * 60 * 1000))});
-            addEventByHouseName("Panthers",{name: "Test Event", position: 1, points: 100, date: new Date(Date.now() - Math.floor(Math.random() * 30 * 24 * 60 * 60 * 1000))});
-            addEventByHouseName("Leopards",{name: "Test Event", position: 1, points: 100, date: new Date(Date.now() - Math.floor(Math.random() * 30 * 24 * 60 * 60 * 1000))});
+            let date = new Date(Date.now() - Math.floor(Math.random() * 30 * 24 * 60 * 60 * 1000));
+            addEventByHouseName("Lions",{name: events[i].name, position: 1, points: 250, date: date});
+            addEventByHouseName("Tigers",{name: events[i].name, position: 2, points: 200, date: date});
+            addEventByHouseName("Panthers",{name: events[i].name, position: 3, points: 150, date: date});
+            addEventByHouseName("Leopards",{name: events[i].name, position: 4, points: 100, date: date});
         }
         const [houses,lion_events, tiger_events, panther_events, leopard_events] = await Promise.all([
             getAllHouses(),
