@@ -20,7 +20,10 @@ html, body {
   align-items: center;
   text-align: center;
 }
-
+h1{
+  color:black;
+  text-align: center;
+}
 .house-card {
   background: #fff;
   border-radius: 1.5rem;

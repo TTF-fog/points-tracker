@@ -52,7 +52,7 @@ export default function ClientPage({ initialHouses, initialEvents }: ClientPageP
    
     return (
         <div>
-            <h1>Scores</h1>
+            <h1 >Scores</h1>
             <div className="hi2">
                 {houses.map((house) => (
                     <Button 
@@ -65,7 +65,7 @@ export default function ClientPage({ initialHouses, initialEvents }: ClientPageP
                
             </div>
             <div>
-            <h1 style={{color: 'white', textAlign: 'center'}}> House Events</h1>
+            <h1 > House Events</h1>
             <EventList events={events} />
         </div>
         </div>
