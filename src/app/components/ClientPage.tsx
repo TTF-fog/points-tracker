@@ -68,7 +68,7 @@ export default function ClientPage({ initialHouses, initialEvents }: ClientPageP
             <h1 > House Events</h1>
             <EventList events={events} />
         </div>
-        <footer>Designed By <a href="https://github.com/TTF-fog">Ishaan Adhikari</a> for SNSG </footer>
+        <footer>Designed By <a href="https://github.com/TTF-fog">Ishaan Adhikari</a> for SNSG - House Point Tracker Prototype</footer>
         
         </div>
     );
