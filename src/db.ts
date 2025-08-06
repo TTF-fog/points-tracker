@@ -1,10 +1,11 @@
 import { addEvent, createHouse, getAllHouses, getHouseByName, updateHousePoints } from "@/db_utils/manager";
 import mongoose, { ConnectOptions } from "mongoose";
+import config from "./app/config";
 
 
 
-const MONGODB_URI = process.env.MONGODB_URI || "not found";
-
+const MONGODB_URI = config.mongodb.uri || "not found";
+console.log(MONGODB_URI);
 interface MongooseCache {
     conn: typeof mongoose | null;
     promise: Promise<typeof mongoose> | null;

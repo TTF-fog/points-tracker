@@ -1,7 +1,7 @@
 import { dbConnect } from "@/db";
-import { getAllHouses, getAllEvents, getEventsByHouse, addEventByHouseName, updateHousePoints, updateHousePointsByHouseName } from "@/db_utils/manager";
+import { getAllHouses, getAllEvents, getEventsByHouse, addEventByHouseName, updateHousePointsByHouseName } from "@/db_utils/manager";
 import ClientPage from "@/app/components/ClientPage";
-import { get } from "http";
+
 import { unstable_cache } from 'next/cache';
 
 
@@ -67,8 +67,9 @@ const getCachedData = unstable_cache(
                 color: "yellow",
                 date: event.date
             }));
+            console.log("Updating points for Lions");
            
-            updateHousePointsByHouseName("Lions",calculateSum(serializedLionEvents));
+            updateHousePointsByHouseName("Lions",32234);
             const serializedTigerEvents = tiger_events?.map((event: { name: any; position: any; points: any; date: any; }) => ({
                 name: event.name,
                 position: event.position,
@@ -76,6 +77,7 @@ const getCachedData = unstable_cache(
                 color: "red",
                 date: event.date
             }));
+            console.log("Updating points for Tigers");
             updateHousePointsByHouseName("Tigers",calculateSum(serializedTigerEvents));
             const serializedPantherEvents = panther_events?.map((event: { name: any; position: any; points: any; date: any; }) => ({
                 name: event.name,
@@ -84,6 +86,7 @@ const getCachedData = unstable_cache(
                 color: "blue",
                 date: event.date
             }));
+            console.log("Updating points for Panthers");
             updateHousePointsByHouseName("Panthers",calculateSum(serializedPantherEvents));
             const serializedLeopardEvents = leopard_events?.map((event: { name: any; position: any; points: any; date: any; }) => ({
                 name: event.name,
@@ -92,6 +95,7 @@ const getCachedData = unstable_cache(
                 color: "green",
                 date: event.date
             }));
+            console.log("Updating points for Leopards");
             updateHousePointsByHouseName("Leopards",calculateSum(serializedLeopardEvents));
             serializedEvents.push(serializedLionEvents, serializedTigerEvents, serializedPantherEvents, serializedLeopardEvents);
       

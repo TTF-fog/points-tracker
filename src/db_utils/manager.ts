@@ -16,17 +16,20 @@ interface EventUpdateData {
 }
 export const updateHousePointsByHouseName = async (houseName: string, points: number) => {
     try {
-        const house = await House.findOne({ name: houseName });
-        house.points = points;
-        await house.save();
+        console.log(`[updateHousePointsByHouseName] Starting update for house: ${houseName} with points: ${points}`);
+        const house = await House.updateOne({ 'name': houseName }, { $set: { "points": points } });
         if (!house) {
+            console.log(`[updateHousePointsByHouseName] House not found: ${houseName}`);
             throw new Error('House not found');
         }
+        
+        
+        console.log(`[updateHousePointsByHouseName] Updated points for house: ${houseName} to ${points}`);
     } catch (error: unknown) {
         if (error instanceof Error) {
+            console.error(`[updateHousePointsByHouseName] Error updating house points: ${error.message}`);
             throw new Error(`Failed to update house points: ${error.message}`);
         }
-        throw new Error('Failed to update house points: Unknown error');
     }
 };
 
@@ -79,7 +82,7 @@ export const updateHousePoints = async (id: string, points: number) => {
         }
         return await House.findByIdAndUpdate(
             id,
-            { $set: { points } },
+            { $set: { "points" : points} },
             { new: true }
         );
     } catch (error: unknown) {

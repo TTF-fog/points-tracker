@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import Button from './Button';
 import EventList from './eventList';
 
@@ -48,7 +49,7 @@ export default function ClientPage({ initialHouses, initialEvents }: ClientPageP
 
     const houses = Array.isArray(initialHouses) ? initialHouses : [];
     const events = Array.isArray(initialEvents) ? initialEvents : [];
-    console.log(events[0]);
+  
    
     return (
         <div>
@@ -68,7 +69,7 @@ export default function ClientPage({ initialHouses, initialEvents }: ClientPageP
             <h1 > House Events</h1>
             <EventList events={events} />
         </div>
-        <footer>Designed By <a href="https://github.com/TTF-fog">Ishaan Adhikari</a> for SNSG - House Point Tracker Prototype</footer>
+        <footer>Designed By <a href="https://github.com/TTF-fog">Ishaan Adhikari</a> for SNSG - House Point Tracker Prototype <Link href='/tech'>Tech Stack</Link></footer>
         
         </div>
     );
