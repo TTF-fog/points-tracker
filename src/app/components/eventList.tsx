@@ -12,7 +12,7 @@ interface eventListProps {
 }
 
 function parseEvents(events: {name: string, position: number, points: number, date: Date, color: string}[]) {
-    let parsedEvents: Record<string, Array<{name: string, position: number, points: number, date: Date, color: string}>> = {};
+    const parsedEvents: Record<string, Array<{name: string, position: number, points: number, date: Date, color: string}>> = {};
     for (const event of events) {
         if (!parsedEvents[event.name]) { 
             parsedEvents[event.name] = [];

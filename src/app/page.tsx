@@ -133,7 +133,7 @@ export default async function Home() {
         const { houses, events: serializedEvents, lionEvents, tigerEvents, pantherEvents, leopardEvents } = await getCachedData();
 
         // Initialize sample events if needed
-        let sampleEvents: Event[] = [
+        const sampleEvents: Event[] = [
             {
                 name: "Track Meet",
                 position: 1,
@@ -209,7 +209,7 @@ export default async function Home() {
         getAllEvents().then((events) => {
             if (events.length == 0) {
                 for (let i = 0; i < 10; i++) {
-                    let date = new Date(Date.now() - Math.floor(Math.random() * 30 * 24 * 60 * 60 * 1000));
+                    const date = new Date(Date.now() - Math.floor(Math.random() * 30 * 24 * 60 * 60 * 1000));
                 addEventByHouseName("Lions", { name: sampleEvents[i].name, position: 1, points: 250, date: date });
                 addEventByHouseName("Tigers", { name: sampleEvents[i].name, position: 2, points: 200, date: date });
                 addEventByHouseName("Panthers", { name: sampleEvents[i].name, position: 3, points: 150, date: date });
