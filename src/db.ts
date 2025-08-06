@@ -11,6 +11,8 @@ interface MongooseCache {
 }
   
 declare global {
+    //var is required here to be global, but not recommended otherwise - ttf
+    // eslint-disable-next-line no-var
     var mongoose: MongooseCache;
 }
   

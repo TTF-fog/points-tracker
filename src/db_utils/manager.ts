@@ -22,8 +22,11 @@ export const updateHousePointsByHouseName = async (houseName: string, points: nu
         if (!house) {
             throw new Error('House not found');
         }
-    } catch (error: any) {
-        throw new Error(`Failed to update house points: ${error.message}`);
+    } catch (error: unknown) {
+        if (error instanceof Error) {
+            throw new Error(`Failed to update house points: ${error.message}`);
+        }
+        throw new Error('Failed to update house points: Unknown error');
     }
 };
 
@@ -34,16 +37,22 @@ export const createHouse = async (name: string) => {
         }
         const house = new House({ name });
         return await house.save();
-    } catch (error: any) {
-        throw new Error(`Failed to create house: ${error.message}`);
+    } catch (error: unknown) {
+        if (error instanceof Error) {
+            throw new Error(`Failed to create house: ${error.message}`);
+        }
+        throw new Error('Failed to create house: Unknown error');
     }
 };
 
 export const getAllHouses = async () => {
     try {
         return await House.find({});
-    } catch (error: any) {
-        throw new Error(`Failed to fetch houses: ${error.message}`);
+    } catch (error: unknown) {
+        if (error instanceof Error) {
+            throw new Error(`Failed to fetch houses: ${error.message}`);
+        }
+        throw new Error('Failed to fetch houses: Unknown error');
     }
 };
 
@@ -54,8 +63,11 @@ export const getHouseByName = async (id: string) => {
             return null;
         }
         return house;
-    } catch (error: any) {
-        throw new Error(`Failed to fetch house: ${error.message}`);
+    } catch (error: unknown) {
+        if (error instanceof Error) {
+            throw new Error(`Failed to fetch house: ${error.message}`);
+        }
+        throw new Error('Failed to fetch house: Unknown error');
     }
 };
 
@@ -70,8 +82,11 @@ export const updateHousePoints = async (id: string, points: number) => {
             { $set: { points } },
             { new: true }
         );
-    } catch (error: any) {
-        throw new Error(`Failed to update house points: ${error.message}`);
+    } catch (error: unknown) {
+        if (error instanceof Error) {
+            throw new Error(`Failed to update house points: ${error.message}`);
+        }
+        throw new Error('Failed to update house points: Unknown error');
     }
 };
 
@@ -88,8 +103,11 @@ export const addEvent = async (
             { $push: { events: { ...eventData } } },
             { new: true }
         );
-    } catch (error: any) {
-        throw new Error(`Failed to add event: ${error.message}`);
+    } catch (error: unknown) {
+        if (error instanceof Error) {
+            throw new Error(`Failed to add event: ${error.message}`);
+        }
+        throw new Error('Failed to add event: Unknown error');
     }
 };
 export const addEventByHouseName = async (
@@ -104,8 +122,11 @@ export const addEventByHouseName = async (
             { $push: { events: { ...eventData } } },
             { new: true }
         );
-    } catch (error: any) {
-        throw new Error(`Failed to add event: ${error.message}`);
+    } catch (error: unknown) {
+        if (error instanceof Error) {
+            throw new Error(`Failed to add event: ${error.message}`);
+        }
+        throw new Error('Failed to add event: Unknown error');
     }
 };
 
@@ -115,8 +136,11 @@ export const getAllEvents = async () => {
         // Flatten the events array from all houses
         const allEvents = houses.flatMap(house => house.events);
         return allEvents;
-    } catch (error: any) {
-        throw new Error(`Failed to fetch events: ${error.message}`);
+    } catch (error: unknown) {
+        if (error instanceof Error) {
+            throw new Error(`Failed to fetch events: ${error.message}`);
+        }
+        throw new Error('Failed to fetch events: Unknown error');
     }
 };
 
@@ -124,8 +148,11 @@ export const getEventsByHouse = async (house_name: string) => {
     try {
         const house = await House.findOne({ name: house_name }).select('events');
         return house?.events;
-    } catch (error: any) {
-        throw new Error(`Failed to fetch events: ${error.message}`);
+    } catch (error: unknown) {
+        if (error instanceof Error) {
+            throw new Error(`Failed to fetch events: ${error.message}`);
+        }
+        throw new Error('Failed to fetch events: Unknown error');
     }
 };
 // Update an event in a house
@@ -149,8 +176,11 @@ export const updateEvent = async (
             { $set: updateQuery },
             { new: true }
         );
-    } catch (error: any) {
-        throw new Error(`Failed to update event: ${error.message}`);
+    } catch (error: unknown) {
+        if (error instanceof Error) {
+            throw new Error(`Failed to update event: ${error.message}`);
+        }
+        throw new Error('Failed to update event: Unknown error');
     }
 };
 
@@ -161,8 +191,10 @@ export const deleteHouse = async (id: string) => {
             throw new Error('Invalid house ID');
         }
         return await House.findByIdAndDelete(id);
-    } catch (error: any) {
-        throw new Error(`Failed to delete house: ${error.message}`);
+    } catch (error: unknown) {
+        if (error instanceof Error) {
+            throw new Error(`Failed to delete house: ${error.message}`);
+        }
+        throw new Error('Failed to delete house: Unknown error');
     }
 };
-

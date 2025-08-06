@@ -15,7 +15,7 @@ interface ButtonProps {
     }>;
 }
 
-export default function house_card({ house: house_card, count, events }: ButtonProps) {
+export default function House_card({ house: house_card, count, events }: ButtonProps) {
     const [showEvents, setShowEvents] = useState(false);
     
     const getHouseColor = (house: string) => {
