@@ -1,0 +1,86 @@
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: black;
+}
+
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+.house-card {
+  background-color: white;
+  border-radius: 1rem;
+  padding: 1rem;
+  width: 300px;
+}
+.hi2 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  background-color: red;
+  border-radius: 1rem;
+  padding: 1rem;
+}
+
+.event-card {
+  border: 1px solid #e2e8f0;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  margin: 1rem 0;
+  width: 100%;
+  background-color: white;
+  color: rgb(0, 0, 0);
+}
+
+
+.event-header {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  background-color: #f7fafc;
+  font-weight: 600;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.event-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.event-cell {
+  padding: 0.75rem 1rem;
+  text-align: center;
+}
+
+.event-header .event-cell {
+  color: #4a5568;
+}
+
+@media (min-width: 768px) {
+  .hi2 {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+}
+
+#hi {
+  background-color: lightgray;
+  border-radius: 1rem;
+  border: 3px solid black;
+  width: 300px;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
