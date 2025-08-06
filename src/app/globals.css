@@ -1,8 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+
 html, body {
   height: 100%;
   margin: 0;
   padding: 0;
-  background-color: black;
+  background: linear-gradient(135deg, #f8fafc 0%, #e0e7ef 100%);
+  font-family: 'Inter', Arial, sans-serif;
+  color: #222;
 }
 
 #root {
@@ -18,32 +22,79 @@ html, body {
 }
 
 .house-card {
-  background-color: white;
-  border-radius: 1rem;
-  padding: 1rem;
-  width: 300px;
-  transition: all 0.3s ease;
+  background: #fff;
+  border-radius: 1.5rem;
+  padding: 2rem 1.5rem 1.5rem 1.5rem;
+  width: 320px;
+  box-shadow: 0 4px 24px 0 rgba(0,0,0,0.08);
+  transition: box-shadow 0.2s, width 0.3s;
+  margin: 0.5rem;
+  border: none;
 }
 
 .house-card.expanded {
   width: 100%;
-  margin: 1rem 0;
+  margin: 1.5rem 0;
+  box-shadow: 0 8px 32px 0 rgba(0,0,0,0.12);
 }
 
 .house-card-header {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.75rem;
+}
+
+.house-card h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 0 0 0.25rem 0;
+}
+
+.house-card p {
+  font-size: 1.1rem;
+  color: #666;
+  margin: 0 0 1rem 0;
+}
+
+.house-card button {
+  background: linear-gradient(90deg, #6366f1 0%, #60a5fa 100%);
+  color: #fff;
+  border: none;
+  border-radius: 999px;
+  padding: 0.7rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 2px 8px 0 rgba(99,102,241,0.08);
+  transition: background 0.2s, transform 0.1s;
+  margin-top: 0.5rem;
+}
+.house-card button:hover {
+  background: linear-gradient(90deg, #4f46e5 0%, #2563eb 100%);
+  transform: translateY(-2px) scale(1.03);
 }
 
 .house-events {
-  margin-top: 1rem;
+  margin-top: 1.5rem;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 1rem;
-  padding: 1rem;
-  border-radius: 10rem;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 1.5rem;
+  padding: 1rem 0;
+  border-radius: 1rem;
+  animation: slideDown 0.3s ease-out;
+  transform-origin: top;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: scaleY(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scaleY(1);
+  }
 }
 
 .hi2 {
@@ -51,29 +102,47 @@ html, body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 1rem;
-  background-color: red;
-  border-radius: 1rem;
-  padding: 1rem;
+  gap: 1.5rem;
+  background: transparent;
+  border-radius: 1.5rem;
+  padding: 1.5rem 0;
   width: 100%;
 }
 
 .event-card {
-  border: 1px solid #e2e8f0;
-  border-radius: 0.5rem;
+  border: none;
+  border-radius: 1rem;
+  box-shadow: 0 2px 12px 0 rgba(0,0,0,0.07);
   overflow: hidden;
-  margin: 1rem 0;
+  margin: 0.5rem 0;
   width: 100%;
-  background-color: white;
-  color: rgb(0, 0, 0);
+  background: #fff;
+  color: #222;
+  animation: fadeIn 0.3s ease-out;
+  transition: box-shadow 0.2s;
+}
+.event-card:hover {
+  box-shadow: 0 6px 24px 0 rgba(99,102,241,0.10);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .event-header {
   display: grid;
   grid-template-columns: 2fr 1fr 1fr 1fr;
-  background-color: #f7fafc;
+  background: #f1f5f9;
   font-weight: 600;
-  border-bottom: 1px solid #e2e8f0;
+  border-bottom: 1px solid #e5e7eb;
+  color: #374151;
 }
 
 .event-row {
@@ -83,20 +152,36 @@ html, body {
 
 .event-group-header {
   display: flex;
-  min-height: 5rem;
-  font-size: 25px;
+  min-height: 3.5rem;
+  font-size: 1.25rem;
   height: auto;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
-  justify-content: center;
-  color: white;
-  border: 1px solid #e2e8f0;
-  border-radius: 0.5rem;
+  justify-content: flex-start;
+  color: #222;
+  border: none;
+  border-radius: 0.75rem;
   overflow: hidden;
-  margin: 1rem 0;
+  margin: 0.5rem 0;
   width: 100%;
-  background-color: white;
-  color: rgb(0, 0, 0);
+  background: #fff;
+  box-shadow: 0 1px 4px 0 rgba(0,0,0,0.04);
+  padding: 0.5rem 1.25rem;
+  cursor: pointer;
+
+  transition: background 0.2s;
+}
+.event-group-header:hover {
+  background: #f3f4f6;
+
+}
+
+.event-group-content {
+  overflow: hidden;
+  animation: slideDown 0.3s ease-out;
+  border-radius: 0 0 0.75rem 0.75rem;
+  background: #000000;
+  margin-bottom: 1rem;
 }
 
 .event-cell {
@@ -105,7 +190,8 @@ html, body {
 }
 
 .event-header .event-cell {
-  color: #4a5568;
+  color: #000000;
+
 }
 
 @media (min-width: 768px) {
@@ -113,18 +199,17 @@ html, body {
     flex-direction: row;
     flex-wrap: wrap;
   }
-  
   .house-card.expanded {
     width: 100%;
-    margin: 1rem 0;
+    margin: 1.5rem 0;
   }
 }
 
 #hi {
-  background-color: lightgray;
+  background: #f3f4f6;
   border-radius: 1rem;
-  border: 3px solid black;
-  width: 300px;
+  border: 2px solid #e5e7eb;
+  width: 320px;
   padding: 1rem;
   display: flex;
   flex-direction: column;
