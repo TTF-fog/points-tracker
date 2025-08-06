@@ -20,6 +20,7 @@ interface ClientPageProps {
         position: number;
         points: number;
         color: string;
+        date: Date;
     }>;
     Lion_Events: Array<{
         name: string;
@@ -57,7 +58,8 @@ export default function ClientPage({ initialHouses, initialEvents }: ClientPageP
                     <Button 
                         key={house._id} 
                         house={house.name} 
-                        count={house.points} 
+                        count={house.points}
+                        events={events}
                     />
                 ))}
                

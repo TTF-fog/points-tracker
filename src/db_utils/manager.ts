@@ -14,6 +14,18 @@ interface EventUpdateData {
     position?: number;
     points?: number;
 }
+export const updateHousePointsByHouseName = async (houseName: string, points: number) => {
+    try {
+        const house = await House.findOne({ name: houseName });
+        house.points = points;
+        await house.save();
+        if (!house) {
+            throw new Error('House not found');
+        }
+    } catch (error: any) {
+        throw new Error(`Failed to update house points: ${error.message}`);
+    }
+};
 
 export const createHouse = async (name: string) => {
     try {

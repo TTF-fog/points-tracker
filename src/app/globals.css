@@ -16,12 +16,36 @@ html, body {
   align-items: center;
   text-align: center;
 }
+
 .house-card {
   background-color: white;
   border-radius: 1rem;
   padding: 1rem;
   width: 300px;
+  transition: all 0.3s ease;
 }
+
+.house-card.expanded {
+  width: 100%;
+  margin: 1rem 0;
+}
+
+.house-card-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.house-events {
+  margin-top: 1rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1rem;
+  padding: 1rem;
+  border-radius: 10rem;
+}
+
 .hi2 {
   display: flex;
   flex-direction: column;
@@ -31,6 +55,7 @@ html, body {
   background-color: red;
   border-radius: 1rem;
   padding: 1rem;
+  width: 100%;
 }
 
 .event-card {
@@ -55,6 +80,7 @@ html, body {
   display: grid;
   grid-template-columns: 2fr 1fr 1fr 1fr;
 }
+
 .event-group-header {
   display: flex;
   min-height: 5rem;
@@ -82,11 +108,15 @@ html, body {
   color: #4a5568;
 }
 
-
 @media (min-width: 768px) {
   .hi2 {
     flex-direction: row;
     flex-wrap: wrap;
+  }
+  
+  .house-card.expanded {
+    width: 100%;
+    margin: 1rem 0;
   }
 }
 

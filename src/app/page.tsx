@@ -1,5 +1,5 @@
 import { dbConnect } from "@/db";
-import { getAllHouses, getAllEvents, getEventsByHouse, addEventByHouseName } from "@/db_utils/manager";
+import { getAllHouses, getAllEvents, getEventsByHouse, addEventByHouseName, updateHousePoints, updateHousePointsByHouseName } from "@/db_utils/manager";
 import ClientPage from "@/app/components/ClientPage";
 import { get } from "http";
 import { unstable_cache } from 'next/cache';
@@ -27,8 +27,14 @@ interface Event {
 
 
 const getCachedData = unstable_cache(
+   
     async () => {
         console.log('Fetching fresh data at:', new Date().toISOString());
+        const calculateSum = (arr: Event[]) => {
+            return arr.reduce((total, current) => {
+                return total + current.points;
+            }, 0);
+        }
         
         try {
             await dbConnect();
@@ -40,7 +46,7 @@ const getCachedData = unstable_cache(
                 getEventsByHouse("Panthers"),
                 getEventsByHouse("Leopards")
             ]);
-
+            
             const serializedHouses = houses.map((house: House) => ({
                 _id: house._id.toString(),
                 name: house.name,
@@ -61,7 +67,8 @@ const getCachedData = unstable_cache(
                 color: "yellow",
                 date: event.date
             }));
-
+           
+            updateHousePointsByHouseName("Lions",calculateSum(serializedLionEvents));
             const serializedTigerEvents = tiger_events?.map((event: { name: any; position: any; points: any; date: any; }) => ({
                 name: event.name,
                 position: event.position,
@@ -69,6 +76,7 @@ const getCachedData = unstable_cache(
                 color: "red",
                 date: event.date
             }));
+            updateHousePointsByHouseName("Tigers",calculateSum(serializedTigerEvents));
             const serializedPantherEvents = panther_events?.map((event: { name: any; position: any; points: any; date: any; }) => ({
                 name: event.name,
                 position: event.position,
@@ -76,6 +84,7 @@ const getCachedData = unstable_cache(
                 color: "blue",
                 date: event.date
             }));
+            updateHousePointsByHouseName("Panthers",calculateSum(serializedPantherEvents));
             const serializedLeopardEvents = leopard_events?.map((event: { name: any; position: any; points: any; date: any; }) => ({
                 name: event.name,
                 position: event.position,
@@ -83,11 +92,9 @@ const getCachedData = unstable_cache(
                 color: "green",
                 date: event.date
             }));
-
-            serializedEvents.push(serializedLionEvents);
-            serializedEvents.push(serializedTigerEvents);
-            serializedEvents.push(serializedPantherEvents);
-            serializedEvents.push(serializedLeopardEvents);
+            updateHousePointsByHouseName("Leopards",calculateSum(serializedLeopardEvents));
+            serializedEvents.push(serializedLionEvents, serializedTigerEvents, serializedPantherEvents, serializedLeopardEvents);
+      
 
             serializedEvents = serializedEvents
                 .flatMap(events => events || [])

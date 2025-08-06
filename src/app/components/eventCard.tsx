@@ -23,13 +23,13 @@ export default function eventCard({ name, position, points, date, color }: event
                 <div className="event-cell">Name</div>
                 <div className="event-cell">Position</div>
                 <div className="event-cell">Points</div>
-                <div className="event-cell">Date</div>
+                {/* <div className="event-cell">Date</div> */}
             </div>
             <div className="event-row">
                 <div className="event-cell">{name}</div>
                 <div className="event-cell">{position}</div>
                 <div className="event-cell">{points}</div>
-                <div className="event-cell">{formatDate(date)}</div>
+                {/* <div className="event-cell">{formatDate(date)}</div> */} 
             </div>
         </div>
     );
