@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import Button from './Button';
 import EventList from './eventList';
-import { getCachedData } from '../page';
+
 interface ClientPageProps {
     initialHouses: Array<{
         _id: string;

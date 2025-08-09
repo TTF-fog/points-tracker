@@ -26,7 +26,7 @@ interface Event {
 }
 
 
-export const getCachedData = unstable_cache(
+const getCachedData = unstable_cache(
    
     async () => {
         const data_fetch_time = new Date().toLocaleString();

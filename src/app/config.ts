@@ -9,7 +9,7 @@ interface Config {
 console.log(process.env.prod);
 if (process.env.prod == "false" || process.env.prod == undefined){
     console.log("Local Mode");
-    //@ts-ignore
+    // eslint-disable-next-line no-var
     var config: Config = {
         mongodb:{
             uri: process.env.LOCAL_MONGODB_URI || '',
@@ -18,7 +18,7 @@ if (process.env.prod == "false" || process.env.prod == undefined){
     };
 }else{
     console.log("Production Mode");
-    //@ts-ignore
+    // eslint-disable-next-line no-var
     var config: Config = {
         mongodb:{
             uri: process.env.PROD_MONGODB_URI || '',
