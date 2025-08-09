@@ -1,8 +1,9 @@
 "use client";
-import { set } from "mongoose";
 import { useState } from "react";
-
-const HOUSES = ["Lions", "Tigers", "Panthers", "Leopards"];
+import eventCard from "../components/eventCard";
+import EventCard from "../components/eventCard";
+import { addEventByHouseName } from "@/db_utils/manager";
+let HOUSES = ["Lions", "Tigers", "Panthers", "Leopards"];
 const HOUSE_COLORS = {
     "Lions": "#FFD700", // Yellow
     "Tigers": "#FF4444", // Red
@@ -17,6 +18,19 @@ interface Event {
     date: Date;
     house: string;
 }
+// //TODO: refactor code to not use record
+// async function setOnDB(events: Record<string, Array<Event>>, eventName: string){
+//     for (const event of events[eventName]){
+//         // house is determined by owner of array
+//         let parsed_event ={
+//             name: event.name,
+//             position: event.position,
+//             points: event.points,
+//             date: event.date,
+//         }
+//         await addEventByHouseName(event.house, parsed_event);
+//     }
+// }
 // eslint-disable-next-line prefer-const
 let events: Record<string, Array<Event>> = {};
 export default function EventEntry() {
@@ -38,7 +52,7 @@ export default function EventEntry() {
         if (!events[eventName]) {
             events[eventName] = [];
         }
-
+        
         // Check if position or points already exists for this event
         const positionExists = events[eventName].some(event => event.position === position);
         const pointsExists = events[eventName].some(event => event.points === points);
@@ -69,20 +83,16 @@ export default function EventEntry() {
             setMessage("Event Saved");
             handleHouseClick();
         }
+        HOUSES = HOUSES.filter(house => house !== HOUSES[currentHouse]);
+        
     }
+
     const handleHouseClick = () => {
         setCurrentHouse((prev) => (prev + 1) % HOUSES.length);
         setMessage("Save");
     }
     const setPointsLimited = (number: number) => {
-        console.log(number)
-        console.log(points)
-        if (number > points) { //for somereason this happens when it goes up
-            setPoints(number-1+25);
-        }else{
-            setPoints(number+1-25);
-            setPoints(points+25)
-        }
+      setPoints(number);
     }
     const setPositionLimited = (number: number) => {
         if (number > 4 || number == 0) {
@@ -99,6 +109,7 @@ export default function EventEntry() {
             justifyContent: 'center',
             backgroundColor: '#f9fafb'
         }}>
+          
             {!showWidget ? (
                 <div style={{
                     maxWidth: '28rem',
@@ -224,6 +235,20 @@ export default function EventEntry() {
                         >
                             {messagee}
                         </button>
+                    </div>
+                    
+                    <div style={{ marginTop: '2rem' }}>
+                        <h3 style={{ fontSize: '1.1rem', fontWeight: '600', marginBottom: '1rem' }}>Existing Entries:</h3>
+                        {events[eventName]?.map((event, index) => (
+                            <EventCard 
+                                key={index}
+                                name={event.house}
+                                position={event.position}
+                                points={event.points}
+                                date={event.date}
+                                color={HOUSE_COLORS[event.house as keyof typeof HOUSE_COLORS]}
+                            />
+                        ))}
                     </div>
                 </div>
             )}
