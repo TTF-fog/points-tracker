@@ -3,13 +3,6 @@ import { useState, type FormEvent } from "react";
 import { addEventAction } from "./actions";
 import { useRouter } from "next/navigation";
 
-let HOUSES = ["Lions", "Tigers", "Panthers", "Leopards"];
-const HOUSE_COLORS = {
-    "Lions": "#FFD700", // Yellow
-    "Tigers": "#FF4444", // Red
-    "Panthers": "#4444FF", // Blue
-    "Leopards": "#44FF44" // Green
-};
 
 interface Event {
     name: string;
@@ -42,7 +35,7 @@ export default function EventEntry() {
             { name: "Leopards", points: leopardPoints },
         ];
 
-        pointsMap.sort((a, b) => Number(b.points) - Number(a.points));
+        pointsMap = pointsMap.sort((a, b) => Number(b.points) - Number(a.points));
         let pos = 1
         for (const house of pointsMap) {
             promises.push(addEventAction(house.name, eventName, Number(house.points),pos));
@@ -55,7 +48,7 @@ export default function EventEntry() {
             router.push('/');
         }
     };
-
+    //terrible auth incoming
     return (
         <div style={{
             minHeight: '100vh',
@@ -65,7 +58,7 @@ export default function EventEntry() {
             backgroundColor: '#f9fafb'
         }}>
             <form onSubmit={handleSubmit} style={{marginTop: '2rem'}}>
-                <div style={{marginBottom: '1.5rem'}}>// shitty auth go br
+                <div style={{marginBottom: '1.5rem'}}>
                     <input
                         type="text"
                         value={pass}
