@@ -136,7 +136,6 @@ export const addEventByHouseName = async (
 export const getAllEvents = async () => {
     try {
         const houses = await House.find({}).select('events');
-        // Flatten the events array from all houses
         const allEvents = houses.flatMap(house => house.events);
         return allEvents;
     } catch (error: unknown) {
@@ -158,46 +157,44 @@ export const getEventsByHouse = async (house_name: string) => {
         throw new Error('Failed to fetch events: Unknown error');
     }
 };
-// Update an event in a house
-export const updateEvent = async (
-    houseId: string,
-    eventId: string,
-    eventData: EventUpdateData
-) => {
-    try {
-        if (!Types.ObjectId.isValid(houseId)) {
-            throw new Error('Invalid house ID');
-        }
-        
-        const updateQuery: Record<string, any> = {};
-        Object.keys(eventData).forEach(key => {
-            updateQuery[`events.$.${key}`] = eventData[key as keyof EventUpdateData];
-        });
+// export const updateEvent = async (
+//     houseId: string,
+//     eventId: string,
+//     eventData: EventUpdateData
+// ) => {
+//     try {
+//         if (!Types.ObjectId.isValid(houseId)) {
+//             throw new Error('Invalid house ID');
+//         }
+//
+//         const updateQuery: Record<string, any> = {};
+//         Object.keys(eventData).forEach(key => {
+//             updateQuery[`events.$.${key}`] = eventData[key as keyof EventUpdateData];
+//         });
+//
+//         return await House.findOneAndUpdate(
+//             { _id: houseId, 'events._id': eventId },
+//             { $set: updateQuery },
+//             { new: true }
+//         );
+//     } catch (error: unknown) {
+//         if (error instanceof Error) {
+//             throw new Error(`Failed to update event: ${error.message}`);
+//         }
+//         throw new Error('Failed to update event: Unknown error');
+//     }
+// };
 
-        return await House.findOneAndUpdate(
-            { _id: houseId, 'events._id': eventId },
-            { $set: updateQuery },
-            { new: true }
-        );
-    } catch (error: unknown) {
-        if (error instanceof Error) {
-            throw new Error(`Failed to update event: ${error.message}`);
-        }
-        throw new Error('Failed to update event: Unknown error');
-    }
-};
-
-// Delete a house
-export const deleteHouse = async (id: string) => {
-    try {
-        if (!Types.ObjectId.isValid(id)) {
-            throw new Error('Invalid house ID');
-        }
-        return await House.findByIdAndDelete(id);
-    } catch (error: unknown) {
-        if (error instanceof Error) {
-            throw new Error(`Failed to delete house: ${error.message}`);
-        }
-        throw new Error('Failed to delete house: Unknown error');
-    }
-};
+// export const deleteHouse = async (id: string) => {
+//     try {
+//         if (!Types.ObjectId.isValid(id)) {
+//             throw new Error('Invalid house ID');
+//         }
+//         return await House.findByIdAndDelete(id);
+//     } catch (error: unknown) {
+//         if (error instanceof Error) {
+//             throw new Error(`Failed to delete house: ${error.message}`);
+//         }
+//         throw new Error('Failed to delete house: Unknown error');
+//     }
+// };

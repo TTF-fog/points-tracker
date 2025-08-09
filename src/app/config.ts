@@ -6,7 +6,7 @@ interface Config {
         collection: string;
     }
 }
-console.log(process.env.prod);
+
 if (process.env.prod == "false" || process.env.prod == undefined){
     console.log("Local Mode");
     // eslint-disable-next-line no-var

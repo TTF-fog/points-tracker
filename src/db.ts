@@ -24,7 +24,6 @@ if (!cached) {
 }
 
 export async function dbConnect() {
-    console.log(MONGODB_URI);
     if (cached.conn) {
         console.log('Already Connected');
         return cached.conn;
