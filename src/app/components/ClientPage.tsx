@@ -73,7 +73,7 @@ export default function ClientPage({ initialHouses, initialEvents, data_fetch_ti
         <footer>Designed By <a href="https://github.com/TTF-fog">Ishaan Adhikari</a> for SNSG - House Point Tracker Prototype - <Link href='/tech'>Tech Stack</Link></footer>
         <div>
             <p>Data fetched at: {data_fetch_time}</p>
-            
+            <Link href='/login'>Edit Data</Link>
         </div>
         </div>
     );

@@ -18,3 +18,4 @@ const HouseSchema: Schema = new Schema({
 });
 
 export const House = models.House || model("House", HouseSchema);
+
