@@ -17,7 +17,6 @@ const eslintConfig = [
       "@typescript-eslint/no-unused-vars": "off",
       "@typescript-eslint/prefer-const": "off",
       "@typescript-eslint/no-var": "off",
-      
     }
   },
 ];

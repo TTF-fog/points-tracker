@@ -17,13 +17,16 @@ interface Event {
     date: Date;
     house: string;
 }
+// eslint-disable-next-line prefer-const
 let events: Record<string, Array<Event>> = {};
 export default function EventEntry() {
     const [eventName, setEventName] = useState("");
     const [showWidget, setShowWidget] = useState(false);
     const [currentHouse, setCurrentHouse] = useState(0);
     const [points, setPoints] = useState(0);
+        // eslint-disable-next-line prefer-const
     const [position, setPosition] = useState(1);
+        // eslint-disable-next-line prefer-const
     let [messagee, setMessage] = useState("");
     
 
@@ -161,7 +164,7 @@ export default function EventEntry() {
                         style={{
                             cursor: 'pointer',
                             padding: '1rem',
-                            backgroundColor: HOUSE_COLORS[HOUSES[currentHouse]],
+                            backgroundColor: HOUSE_COLORS[HOUSES[currentHouse] as keyof typeof HOUSE_COLORS],
                             borderRadius: '0.5rem',
                             marginBottom: '1.5rem',
                             color: 'white',
@@ -170,10 +173,7 @@ export default function EventEntry() {
                             textAlign: 'center',
                             boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
                             transition: 'transform 0.2s, box-shadow 0.2s',
-                            ':hover': {
-                                transform: 'translateY(-2px)',
-                                boxShadow: '0 4px 6px rgba(0,0,0,0.1)'
-                            }
+                           
                         }}
                     >
                         {HOUSES[currentHouse]}
