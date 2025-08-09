@@ -26,10 +26,11 @@ interface Event {
 }
 
 
-const getCachedData = unstable_cache(
+export const getCachedData = unstable_cache(
    
     async () => {
-        console.log('Fetching fresh data at:', new Date().toISOString());
+        const data_fetch_time = new Date().toLocaleString();
+        console.log('Fetching fresh data at:', data_fetch_time);
         const calculateSum = (arr: Event[]) => {
             return arr.reduce((total, current) => {
                 return total + current.points;
@@ -69,7 +70,7 @@ const getCachedData = unstable_cache(
             }));
             console.log("Updating points for Lions");
            
-            updateHousePointsByHouseName("Lions",32234);
+            updateHousePointsByHouseName("Lions",calculateSum(serializedLionEvents));
             const serializedTigerEvents = tiger_events?.map((event: { name: any; position: any; points: any; date: any; }) => ({
                 name: event.name,
                 position: event.position,
@@ -121,7 +122,8 @@ const getCachedData = unstable_cache(
                 lionEvents: serializedLionEvents,
                 tigerEvents: serializedTigerEvents,
                 pantherEvents: serializedPantherEvents,
-                leopardEvents: serializedLeopardEvents
+                leopardEvents: serializedLeopardEvents,
+                data_fetch_time: data_fetch_time
             };
         } catch (error) {
             console.error('Error fetching data:', error);
@@ -134,7 +136,7 @@ const getCachedData = unstable_cache(
 
 export default async function Home() {
     try {
-        const { houses, events: serializedEvents, lionEvents, tigerEvents, pantherEvents, leopardEvents } = await getCachedData();
+        const { houses, events: serializedEvents, lionEvents, tigerEvents, pantherEvents, leopardEvents, data_fetch_time  } = await getCachedData();
 
         // Initialize sample events if needed
         const sampleEvents: Event[] = [
@@ -223,14 +225,18 @@ export default async function Home() {
     })
         // Get cached data
  
-        return <ClientPage 
-            initialHouses={houses} 
-            initialEvents={serializedEvents} 
-            Lion_Events={lionEvents}
-            Tiger_Events={tigerEvents}
-            Panther_Events={pantherEvents}
-            Leopard_Events={leopardEvents}
-        />;
+        return (
+            <ClientPage 
+                initialHouses={houses} 
+                initialEvents={serializedEvents} 
+                Lion_Events={lionEvents}
+                Tiger_Events={tigerEvents}
+                Panther_Events={pantherEvents}
+                Leopard_Events={leopardEvents}
+                data_fetch_time={data_fetch_time}
+        />
+        
+    )
     } catch (error) {
         console.error("Error in Home component:", error);
         return (

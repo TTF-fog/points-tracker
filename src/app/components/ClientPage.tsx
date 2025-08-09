@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import Button from './Button';
 import EventList from './eventList';
-
+import { getCachedData } from '../page';
 interface ClientPageProps {
     initialHouses: Array<{
         _id: string;
@@ -43,9 +43,10 @@ interface ClientPageProps {
         position: number;
         points: number;
     }>;
+    data_fetch_time: string;
 }
 
-export default function ClientPage({ initialHouses, initialEvents }: ClientPageProps) {
+export default function ClientPage({ initialHouses, initialEvents, data_fetch_time }: ClientPageProps) {
 
     const houses = Array.isArray(initialHouses) ? initialHouses : [];
     const events = Array.isArray(initialEvents) ? initialEvents : [];
@@ -69,8 +70,11 @@ export default function ClientPage({ initialHouses, initialEvents }: ClientPageP
             <h1 > House Events</h1>
             <EventList events={events} />
         </div>
-        <footer>Designed By <a href="https://github.com/TTF-fog">Ishaan Adhikari</a> for SNSG - House Point Tracker Prototype <Link href='/tech'>Tech Stack</Link></footer>
-        
+        <footer>Designed By <a href="https://github.com/TTF-fog">Ishaan Adhikari</a> for SNSG - House Point Tracker Prototype - <Link href='/tech'>Tech Stack</Link></footer>
+        <div>
+            <p>Data fetched at: {data_fetch_time}</p>
+            
+        </div>
         </div>
     );
 } 
